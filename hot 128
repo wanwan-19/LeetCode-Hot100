@@ -1,0 +1,26 @@
+#include<unordered_map>
+#include<algorithm>
+#include<vector>
+using namespace std;
+
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        unordered_map<int>st(nums.begin(), nums.end());
+        int ans = 0;
+
+        //遍历集合中的所有元素
+        for (int nums : st) {
+
+            //只从序列起点开始拓展
+            if (!st.count(nums - 1) ){
+                int x = nums + 1;
+
+                //向右拓展
+                while (st.count(x))x++;
+                ans = max(ans, x - nums);//更新最大长度
+            }
+        }
+        return ans;
+    }
+};
